@@ -49,14 +49,25 @@ $bannerCollection = $block->getBannerCollection();
             $(document).ready(function($) {
                 var numb_loaded = 0;
                 var image = $('.' + flexSliderSelector).find('img').eq(1);
+                console.log("addlistener");
 
-                image.load(function() {
-                    numb_loaded++;
+                function onload()
+                {
+                    numb_loaded--;
 
-                    if (numb_loaded == image.length) {
+                    if (numb_loaded<=0) {
                         setSliders();
                     }
+                }
+
+                image.each(function () {
+                    if (!$(this)[0].complete) {
+                        numb_loaded++;
+                        $(this).load(onload);
+                    }
                 });
+                if(numb_loaded==0)
+                    onload();
 
 
                 function setSliders() {
