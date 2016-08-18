@@ -49,7 +49,6 @@ $bannerCollection = $block->getBannerCollection();
             $(document).ready(function($) {
                 var numb_loaded = 0;
                 var image = $('.' + flexSliderSelector).find('img').eq(1);
-                console.log("addlistener");
 
                 function onload()
                 {
@@ -76,6 +75,14 @@ $bannerCollection = $block->getBannerCollection();
                     var STYLESLIDE_FLEXSLIDER_THREE = <?php echo \Magestore\Bannerslider\Model\Slider::STYLESLIDE_FLEXSLIDER_THREE ?>;
                     var STYLESLIDE_FLEXSLIDER_FIVE = <?php echo \Magestore\Bannerslider\Model\Slider::STYLESLIDE_FLEXSLIDER_FIVE ?>;
 
+                    var sl;
+                    $(window).resize(function(){
+                        if(!sl)
+                            return;
+                        var items = Math.floor(sl.width()/150);
+                        sl.vars.itemWidth = sl.width()/items;
+                    });
+                    var slider;
                     switch (<?php echo $styleSlide ?>) {
                         case STYLESLIDE_FLEXSLIDER_ONE:
                             $('.' + flexSliderSelector).flexslider({
@@ -124,6 +131,7 @@ $bannerCollection = $block->getBannerCollection();
                                 animationLoop: true,
                                 itemWidth: <?php echo $slider->getWidth() ?>,
                                 slideshow: true,
+                                slideshowSpeed:10000,
                                 itemMargin: 5,
                                 start: function (slider) {
                                     fitImageSlider(slider);
@@ -131,16 +139,19 @@ $bannerCollection = $block->getBannerCollection();
                             });
                             break;
                         default:
+                            var sl = $('.' + flexSliderSelector);
+                            var items = Math.floor(sl.width()/150);
                             $('.' + flexSliderSelector).flexslider({
                                 animation: 'slide',
                                 animationLoop: true,
-                                itemWidth: 400,
+                                itemWidth: sl.width()/items,
                                 slideshow: true,
-                                itemMargin: 5,
-                                minItems: 2,
-                                maxItems: 4,
+                                slideshowSpeed:10000,
+                                itemMargin: 0,
                                 start: function (slider) {
-                                    fitImageSlider(slider);
+                                    sl = slider;
+                                    //fitImageSlider(slider);
+                                    //slider.vars.itemWidth = slider.width()/2;
                                 }
                             });
                             break;
