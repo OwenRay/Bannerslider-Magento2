@@ -87,7 +87,7 @@ $bannerCollection = $block->getBannerCollection();
                         case STYLESLIDE_FLEXSLIDER_ONE:
                             $('.' + flexSliderSelector).flexslider({
                                 animation: '<?php echo $slider->getData("animationB") ?>',
-                                slideshowSpeed: <?php echo $slider->getSliderSpeed() ?>,
+                                slideshowSpeed: <?php echo $slider->getSliderSpeed() ?>+0,
                                 start: function (slider) {
                                     fitImageSlider(slider);
                                 }
@@ -97,7 +97,7 @@ $bannerCollection = $block->getBannerCollection();
                             $('.' + flexSliderSelector).flexslider({
                                 animation: '<?php echo $slider->getData("animationB") ?>',
                                 controlNav: 'thumbnails',
-                                slideshowSpeed: <?php echo $slider->getSliderSpeed() ?>,
+                                slideshowSpeed: <?php echo $slider->getSliderSpeed() ?>+0,
                                 start: function (slider) {
                                     fitImageSlider(slider);
                                 }
@@ -122,14 +122,14 @@ $bannerCollection = $block->getBannerCollection();
                                 animationLoop: true,
                                 slideshow: true,
                                 sync: '#'+flexSliderSelector + '-carousel',
-                                slideshowSpeed: <?php echo $slider->getSliderSpeed() ?>,
+                                slideshowSpeed: <?php echo $slider->getSliderSpeed() ?>+0,
                             });
                             break;
                         case STYLESLIDE_FLEXSLIDER_FIVE:
                             $('.' + flexSliderSelector).flexslider({
                                 animation: 'slide',
                                 animationLoop: true,
-                                itemWidth: <?php echo $slider->getWidth() ?>,
+                                itemWidth: <?php echo $slider->getWidth() ?>+0,
                                 slideshow: true,
                                 slideshowSpeed:10000,
                                 itemMargin: 0,
